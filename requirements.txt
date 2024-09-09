@@ -1,0 +1,7 @@
+gdown-5.2.0
+rembg
+tqdm
+prodigyopt
+ptflops
+wandb
+torchinfo
