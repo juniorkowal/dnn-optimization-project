@@ -11,8 +11,8 @@ def baseline_training():
     num_classes = 211
     model.fc = nn.Linear(model.fc.in_features, num_classes)
 
-    optimizer = Prodigy(params=model.parameters(), lr=1.)
     epochs = 200
+    optimizer = Prodigy(params=model.parameters(), lr=1.)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     transform = transforms.Compose([
