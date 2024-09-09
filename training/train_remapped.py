@@ -47,7 +47,7 @@ def train(model: nn.Module,
         optimizer: optim.Optimizer,
         noise_percentage: float = 0.1,
         num_classes: int = 32):
-
+    model.to(DEVICE)
     model.train()
     running_loss = 0.0
     running_corrects = 0

@@ -30,7 +30,10 @@ def save_model(model: nn.Module, optimizer: optim.Optimizer, scheduler: optim.lr
 def load_model(model: nn.Module, optimizer: optim.Optimizer, scheduler: optim.lr_scheduler.LRScheduler, model_path: str):
     checkpoint = torch.load(model_path)
     model.load_state_dict(checkpoint['model_state_dict'])
-    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    try:
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    except:
+        pass
     if scheduler and checkpoint.get('scheduler_state_dict'):
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
 

@@ -5,3 +5,4 @@ prodigyopt
 ptflops
 wandb
 torchinfo
+rigl-torch

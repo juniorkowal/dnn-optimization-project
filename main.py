@@ -7,10 +7,16 @@ from prodigyopt import Prodigy
 import torch.nn as nn
 from training.train_baseline import baseline_training
 from training.train_remapped import remapped_training
-
+from training.train_rigl import rigl_training
 
 if __name__ == "__main__":
     SET_SEED(0)
-    # preprocess_all() # or download all
-    # baseline_training()
+    preprocess_all() # or download all
+    baseline_training()
     remapped_training(f'{MODELS_DIR}/resnet_baseline/LAST_resnet_baseline_epochs_2.pth', noise_percentage=0.2) # training with remapped classes and noisy labels
+    # sparsificate the model - baseline and remapped; rigl training as well
+    # quantize / compress the sparsed models
+    # optimize with 'things' e.g. augmented data
+    #
+    # evaluate all of the models
+    rigl_training(f'{MODELS_DIR}/resnet_baseline/LAST_resnet_baseline_epochs_2.pth')
