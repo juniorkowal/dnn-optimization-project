@@ -184,8 +184,8 @@ def train_loop(model: nn.Module,
 
     config = {}
 
-    config['macs'] = '{:<30}  {:<8}'.format('Computational complexity: ', macs)
-    config['params'] = '{:<30}  {:<8}'.format('Number of parameters: ', params)
+    config['macs'] = f'{"Computational complexity: " :<30}  {str(macs):<8}'
+    config['params'] = f'{"Number of parameters: " :<30}  {str(params):<8}'
     config['optimizer'] = optimizer.__class__.__name__
     config['architecture']: model.__class__.__name__
     config['scheduler'] = scheduler.__class__.__name__

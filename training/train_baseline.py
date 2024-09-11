@@ -6,12 +6,11 @@ from prodigyopt import Prodigy
 import torch.nn as nn
 
 
-def baseline_training():
+def baseline_training(epochs: int = 100):
     model = models.resnet50(weights=None)
     num_classes = 211
     model.fc = nn.Linear(model.fc.in_features, num_classes)
 
-    epochs = 200
     optimizer = Prodigy(params=model.parameters(), lr=1.)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 

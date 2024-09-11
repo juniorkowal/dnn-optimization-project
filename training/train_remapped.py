@@ -94,15 +94,22 @@ def train(model: nn.Module,
     return train_loss, train_acc
 
 
-def remapped_training(baseline_model_path: str, noise_percentage: float = 0.1):
+def remapped_training(baseline_model_path: str, noise_percentage: float = 0.1, epochs: int = 50):
     model = models.resnet50(weights=None)
 
-    epochs = 200
-    optimizer = Prodigy(params=model.parameters(), lr=1.)
+    num_classes = 211
+    model.fc = nn.Linear(model.fc.in_features, num_classes)
+    model.to(DEVICE)
+
+    optimizer = Prodigy(params=model.parameters(), lr=0.0001)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
 
     basic_funcs.load_model(model, optimizer, scheduler, model_path=baseline_model_path)
     print(f"Loaded model from: {baseline_model_path}")
+
+    for i, param in enumerate(model.parameters()):
+        if i < 143:
+            param.requires_grad = False
 
     num_classes = 32
     model.fc = nn.Linear(model.fc.in_features, num_classes)
