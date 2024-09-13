@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     if not os.path.exists(os.path.join(DATASET_DIR, 'coins_cropped_aug')):
         if not os.path.exists(os.path.join(DATASET_DIR, 'coins_cropped_categorized_by_currency')):
-            preprocess_all() # or download all
+            preprocess_all()
 
     if not os.path.exists(os.path.join(MODELS_DIR, 'ResNet50_BASELINE')):
         baseline_training(epochs=100)
@@ -30,7 +30,3 @@ if __name__ == "__main__":
         model_files = os.path.join(MODELS_DIR, 'ResNet50_SPARSIFIED', 'SPARSE_ResNet50_SPARSIFIED_epochs_50.pth')
         compression.model_compression(model_files)
 
-    # quantize / compress the sparsed models
-    # optimize with 'things' e.g. augmented data
-    #
-    # evaluate all of the models
